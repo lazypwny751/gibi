@@ -192,6 +192,29 @@ parsesectionel() {
 	fi	
 }
 
+getkeyvalue() {
+	line="${1}"
+	line="${line#"${line%%[![:space:]]*}"}"
+
+	key="${line%%=*}"
+	value="${line#*=}"
+
+	key="${key%"${key##*[![:space:]]}"}"
+	key="${key#"${key%%[![:space:]]*}"}"
+
+	value="${value%"${value##*[![:space:]]}"}"
+	value="${value#"${value%%[![:space:]]*}"}"
+
+	case "${2}" in
+		"${key}")
+			echo "${value}"
+		;;
+		*)
+			echo "${key}"
+		;;
+	esac
+}
+
 # Argument parsing.
 while getopts ":d:irhv" opt
 do
