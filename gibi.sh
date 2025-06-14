@@ -16,7 +16,7 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-export isHelp="false" version="0.0.2"
+export isHelp="false" version="2.0.0"
 
 # Function side.
 error() {
@@ -88,24 +88,14 @@ getrepo() {
 	repo="${1##*/}"
 	base="${1%/*}"
 	base="${base##*/}"
-	if [ -d "${gdir}/repo/${base}/${repo}" ]
+	if [ -d "${gdir}/pkg/${base}/${repo}" ]
 	then
-		printf "%s is already clonned, do you want't to reclone it? (y/N):> " "${repo}"
-		read -r ask
-		case "${ask:-N}" in
-			[yY])
-				rm -rf "${gdir}/repo/${base}/${repo}"
-				git clone "https://${1}.git" "${gdir}/repo/${base}/${repo}" || {
-					die "some errors occured wheel cloning \"${repo}\""
-				}
-			;;
-			*) : ;;
-		esac
+		git -C "${gdir}/pkg/${base}/${repo}" pull
 	else
-		[ ! -d "${gdir}/repo/${base}" ] && {
-			mkdir -p "${gdir}/repo/${base}"
+		[ ! -d "${gdir}/pkg/${base}" ] && {
+			mkdir -p "${gdir}/pkg/${base}"
 		}
-		git clone "https://${1}.git" "${gdir}/repo/${base}/${repo}"
+		git clone "https://${1}.git" "${gdir}/pkg/${base}/${repo}"
 	fi
 }
 
@@ -232,7 +222,7 @@ do
 	esac
 done
 
-export gdir="${gdir:-${HOME}/.locale/share/gibi}"
+export gdir="${gdir:-${HOME}/.local/share/gibi}"
 
 shift $((OPTIND - 1))
 if [ "${#}" -gt 0 ]
@@ -250,10 +240,10 @@ fi
 # Operations(from option), main side.
 case "${option:-}" in
 	"install")
-		if checkcomm "git" "mkdir"
+		if checkcomm "git" "mkdir" "ln"
 		then
 			[ ! -d "${gdir}" ] && {
-				mkdir -p "${gdir}/repo"	
+				mkdir -p "${gdir}/pkg"	
 				mkdir -p "${gdir}/bin"
 			}
 
