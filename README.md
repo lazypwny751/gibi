@@ -20,7 +20,7 @@ No dependencies, no magic, just shell.
 ```sh
 ./gibi.sh -d ~/.local/share/gibi        # setup directory
 ./gibi.sh -i github.com/user/repo       # install
-./gibi.sh -u github.com/user/repo       # uninstall
+./gibi.sh -r github.com/user/repo       # remove
 ./gibi.sh -v                            # show version
 ./gibi.sh -h                            # show help
 ```

@@ -203,7 +203,7 @@ parsesectionel() {
 }
 
 # Argument parsing.
-while getopts ":d:iuhv" opt
+while getopts ":d:irhv" opt
 do
 	case "${opt}" in
 		"d")
@@ -212,8 +212,8 @@ do
 		"i")
 			export option="install"
 		;;
-		"u")
-			export option="uninstall"
+		"r")
+			export option="remove"
 		;;
 		"h")
 			export isHelp="true"
@@ -264,7 +264,7 @@ case "${option:-}" in
 			done
 		fi
 	;;
-	"uninstall")
+	"remove")
 		if checkcomm "rm"
 		then
 			IFS=":"
@@ -283,7 +283,7 @@ case "${option:-}" in
 
 		printf "  ./gibi.sh -d <dir>          Setup directory\n"
 		printf "  ./gibi.sh -i <pkg> [...]    Install one or more packages\n"
-		printf "  ./gibi.sh -u <pkg> [...]    Uninstall one or more packages\n"
+		printf "  ./gibi.sh -r <pkg> [...]    Remove one or more packages\n"
 		printf "  ./gibi.sh -v                Show version\n"
 		printf "  ./gibi.sh -h                Show this help\n\n"
 
