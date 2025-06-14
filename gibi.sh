@@ -214,7 +214,22 @@ case "${option:-}" in
 		echo "${version}"
 	;;
 	*)
-		echo "${pkg}"
+		printf "gibi.sh - ByCh4n's experimental package installer (like, kinda)\n\n"
+		printf "Usage:\n"
+
+		printf "  ./gibi.sh -d <dir>          Setup directory\n"
+		printf "  ./gibi.sh -i <pkg> [...]    Install one or more packages\n"
+		printf "  ./gibi.sh -u <pkg> [...]    Uninstall one or more packages\n"
+		printf "  ./gibi.sh -v                Show version\n"
+		printf "  ./gibi.sh -h                Show this help\n\n"
+
+		printf "Package format:\n"
+		printf "  site.domain/user/repo     e.g. github.com/bych4n/hello\n\n"
+
+		printf "Note:\n"
+		printf "  This is not a real package manager. Just... gibi.\n"
+		printf "  Maybe one day it will be. But not today.\n"
+		printf "  For now, it wraps bpkg with a tiny bit of ByCh4n flavor.\n"
 		"${isHelp:-false}" || exit 1 
 	;;
 esac
