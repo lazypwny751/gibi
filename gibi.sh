@@ -19,17 +19,22 @@
 export isHelp="false" version="0.0.2"
 
 # Function side.
+error() {
+	printf "%s: \e[1;31merror\e[0m: %s.\n" "${0##*/}" "${1:-unknown}"
+	return "${2:-1}"
+}
+
 die() {
-	printf "%s: \e[1;31merror\e[0m: %s." "${0##*/}" "${1:-unknown}"
+	printf "%s: \e[1;31mfatal\e[0m: %s.\n" "${0##*/}" "${1:-unknown}"
 	exit "${2:-1}"
 }
 
 info() {
-	printf "%s: \e[1;34minfo\e[0m: %s." "${0##*/}" "${1:-unknown}"
+	printf "%s: \e[1;34minfo\e[0m: %s.\n" "${0##*/}" "${1:-unknown}"
 }
 
 warn() {
-	printf "%s: \e[1;33mwarn\e[0m: %s." "${0##*/}" "${1:-unknown}"	
+	printf "%s: \e[1;33mwarn\e[0m: %s.\n" "${0##*/}" "${1:-unknown}"	
 }
 
 checkcomm() {
@@ -138,6 +143,65 @@ vercomp() {
 	fi
 }
 
+sectionlookup() {
+	## Sections can define only one time.
+	[ "${#}" -lt 2 ] && {
+		warn "please give primary and filepath and section name."
+		return 1
+	}
+
+	if [ -f "${1}" ]
+	then
+		while IFS= read -r line
+		do
+			case "${line}" in
+				*\[*"${2}"*\]*)
+					return 0
+				;;
+			esac
+		done < "${1}"
+		return 1
+	else
+		warn "file \"${1##*/}\" not found"
+		return 1
+	fi	
+}
+
+parsesectionel() {
+	[ "${#}" -lt 2 ] && {
+		warn "please give primary and filepath and section name."
+		return 1
+	}
+
+	if [ -f "${1}" ]
+	then
+		inSection="false"
+		while IFS= read -r line
+		do
+			case "${line}" in
+				*\[*"${2}"*\]*)
+					inSection="true"
+				;;
+				*\[*\]*)
+					if "${inSection}"
+					then
+						break
+					fi
+				;;
+				*)
+					if "${inSection}"
+					then
+						echo "${line}"
+					fi
+				;;
+			esac
+		done < "${1}"
+	else
+		warn "file \"${1##*/}\" not found"
+		return 1
+	fi	
+}
+
 # Argument parsing.
 while getopts ":d:iuhv" opt
 do
@@ -196,7 +260,7 @@ case "${option:-}" in
 			IFS=":"
 			for p in ${pkg}
 			do 
-				getrepo "${p}"
+				parsesectionel "${p}" "test"
 			done
 		fi
 	;;
