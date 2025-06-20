@@ -304,9 +304,8 @@ case "${option:-}" in
 		printf "  site.domain/user/repo     e.g. github.com/bych4n/hello\n\n"
 
 		printf "Note:\n"
-		printf "  This is not a real package manager. Just... gibi.\n"
-		printf "  Maybe one day it will be. But not today.\n"
-		printf "  For now, it wraps bpkg with a tiny bit of ByCh4n flavor.\n"
+		printf "  Yilmaz, ersoy, ilkkan = gibi.\n"
+		printf "  Maybe one day but not today..\n"
 		"${isHelp:-false}" || exit 1 
 	;;
 esac
