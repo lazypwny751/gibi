@@ -12,3 +12,6 @@ jobs:
 
     - name: Golangci-lint
       uses: golangci/golangci-lint-action@v8.0.0
+
+    - name: Run tests (all packages)
+       run: go test -v ./...
