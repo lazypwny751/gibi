@@ -5,6 +5,7 @@ import (
 	"os"
 
 	// "github.com/lazypwny751/gibi/pkg/config"
+	"github.com/lazypwny751/gibi/pkg/base"
 	"github.com/lazypwny751/gibi/pkg/flag"
 )
 
@@ -22,15 +23,20 @@ import (
 //	./gibi --verbose --install dep1,dep2
 //	./gibi --uninstall dep3
 func main() {
+	// Initialize the base directory structure.
+	
+	// Load configuration file
 	flags, err := flag.ParseFlags()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error parsing flags: %v\n", err)
 		os.Exit(1)
 	}
-
+	
 	if flags.Verbose {
-		fmt.Println("Verbose mode enabled")
+		fmt.Println("Verbose mode enabled.")
 	}
+
+	base.Setup(flags.Verbose)
 	if len(flags.Install) > 0 {
 		fmt.Println("Installing dependencies:", flags.Install)
 	} else if len(flags.Uninstall) > 0 {
