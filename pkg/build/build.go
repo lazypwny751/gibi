@@ -13,6 +13,8 @@ import (
 	"github.com/lazypwny751/gibi/pkg/utils"
 )
 
+// BuildPackage builds the specified package based on the provided configuration and source path.
+// It creates necessary directories, writes configuration files, and executes the build script.
 func BuildPackage(pkg config.Config, src string) error {
 	// Check required fields in the package configuration.
 	if src == "" {

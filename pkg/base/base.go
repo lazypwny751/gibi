@@ -9,7 +9,7 @@ import (
 var (
 	usr, _ = user.Current()
 	GibiDir  = usr.HomeDir + "/.gibi"
-	CacheDir   = GibiDir + "/cache"
+	CacheDir   = GibiDir + "/cache" // It should be /tmp/gibi/cache
 	PackageDir = GibiDir + "/pkg"
 	BinDir    = GibiDir + "/bin"
 )

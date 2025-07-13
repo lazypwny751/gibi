@@ -7,8 +7,18 @@ import (
 	"path/filepath"
 	"github.com/lazypwny751/gibi/pkg/config"
 	"github.com/lazypwny751/gibi/pkg/build"
+	"github.com/lazypwny751/gibi/pkg/base"
 	// git "github.com/go-git/go-git/v5"
 )
+
+func installPackageFromCache(pkg string) error {
+	if _, err := os.Stat(filepath.Join(base.CacheDir, pkg)); os.IsNotExist(err) {
+		return fmt.Errorf("package not found in cache: %s", pkg)
+	}
+
+	
+	return nil
+}
 
 // InstallPackages installs the specified packages based on the provided configuration.
 func InstallPackages(pkgs []string) error {
@@ -26,8 +36,14 @@ func InstallPackages(pkgs []string) error {
 				fmt.Printf("Installing package from local path: %s\n", conf.Package)
 
 				if err := build.BuildPackage(*conf, filepath.Dir(pkg)); err != nil {
-					return fmt.Errorf("failed to install package from %s: %w", pkg, err)
+					return fmt.Errorf("failed to build package from %s: %w", pkg, err)
 				}
+
+				if err := installPackageFromCache(conf.Package); err != nil {
+					return fmt.Errorf("failed to install package from cache: %w", err)
+				}
+
+				fmt.Printf("Package %s installed successfully.\n", conf.Package)
 			} else {
 				return fmt.Errorf("local path does not exist: %s", pkg)
 			}
