@@ -6,6 +6,7 @@ import (
 
 	// "github.com/lazypwny751/gibi/pkg/config"
 	"github.com/lazypwny751/gibi/pkg/base"
+	"github.com/lazypwny751/gibi/pkg/install"
 	"github.com/lazypwny751/gibi/pkg/flag"
 )
 
@@ -38,9 +39,12 @@ func main() {
 
 	base.Setup(flags.Verbose)
 	if len(flags.Install) > 0 {
-		fmt.Println("Installing dependencies:", flags.Install)
+		if err := install.InstallPackages(flags.Install); err != nil {
+			fmt.Fprintf(os.Stderr, "Error installing packages: %v\n", err)
+			os.Exit(1)
+		}
 	} else if len(flags.Uninstall) > 0 {
-		fmt.Println("Uninstalling dependencies:", flags.Uninstall)
+		fmt.Println("Uninstalling packages:", flags.Uninstall)
 	}
 
 	os.Exit(0)
