@@ -28,7 +28,7 @@ type Config struct {
 	Package     string `yaml:"package"`
 	Version     string `yaml:"version"`
 	Author      string `yaml:"author"`
-	Build       string `yaml:"build"`
+	Build       string `yaml:"build" json:"-"`
 	Description string `yaml:"description"`
 }
 
