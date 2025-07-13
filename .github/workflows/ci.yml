@@ -3,7 +3,7 @@ name: GoLint
 on: [push, pull_request]
 
 jobs:
-  shellcheck:
+  linting:
     runs-on: ubuntu-latest
 
     steps:
