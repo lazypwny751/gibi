@@ -19,3 +19,11 @@ package emiter
 
 // 	return nil
 // }
+
+// func emit2Docker() error {
+// 	if _, err := exec.LookPath("docker"); err != nil {
+// 		return fmt.Errorf("docker command not found: %w", err)
+// 	}
+
+// 	return nil
+// }
