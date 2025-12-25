@@ -1,1 +1,1 @@
-# GIBI - (GI)t (B)ased (I)nnovative Package Manager
+# Gibi - (Gi)t (B)ased (I)nnovative Package Manager
