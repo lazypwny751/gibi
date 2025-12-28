@@ -1,0 +1,10 @@
+package: gibi
+version: 2.0.0
+author: lazypwny751
+description: A simple and fast package manager written in Go.
+emit: 
+  - debian
+build: |
+  mkdir -p "${GIBI_BUILD}/usr/bin"
+  sh build.sh
+  install -m 755 build/gibi "${GIBI_BUILD}/usr/bin/gibi"

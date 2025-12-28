@@ -1,0 +1,17 @@
+name: GoLint
+
+on: [push, pull_request]
+
+jobs:
+  linting:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repo
+      uses: actions/checkout@v4
+
+    - name: Golangci-lint
+      uses: golangci/golangci-lint-action@v8.0.0
+
+    - name: Run tests (all packages)
+      run: go test -v ./...

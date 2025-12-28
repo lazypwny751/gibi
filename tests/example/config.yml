@@ -1,0 +1,9 @@
+package: package
+version: 0.1.0
+author: lazypwny751
+description: Short description about the project.
+build: |
+  mkdir -p "${GIBI_BUILD}/usr/bin"
+  sh build.sh
+  install -m 755 build/program "${GIBI_BUILD}/usr/bin/gibi"
+

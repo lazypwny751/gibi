@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Binaries for programs and plugins
 main
 gibi
@@ -22,3 +23,9 @@ bin/
 # vweb and database
 *.db
 *.js
+=======
+/tmp/
+/test/
+/build/
+gibi-build*
+>>>>>>> main
