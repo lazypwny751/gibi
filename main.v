@@ -2,7 +2,7 @@ module main
 
 import flag
 import log
-import os
+import os{join_path, home_dir, real_path, abs_path}
 
 import pkg.argparse
 import pkg.config{set_opmode, OpMode}
@@ -12,6 +12,11 @@ const version = '2.0.0'
 
 fn main() {
 	cfg, pos := flag.to_struct[argparse.Config](os.args, skip: 1)!
+
+	prefix := match string(cfg.prefix) {
+		'', ' ' { abs_path(real_path(join_path(home_dir(), '.local/share/gibi'))) }
+		else { abs_path(real_path(join_path(cfg.prefix))) }
+	}
 
 	// Handle help and version flags
 	if cfg.show_help {
@@ -77,5 +82,6 @@ fn main() {
 		}
 	}
 
+	dump(prefix)
 	exit(0)
 }

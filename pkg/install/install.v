@@ -1,5 +1,9 @@
 module install
 
+import os
+
+import pkg.package
+
 pub fn install_packages(pkgs []string) bool {
 	if pkgs.len == 0 {
 		eprintln('Error: No packages specified for installation.')
@@ -7,7 +11,11 @@ pub fn install_packages(pkgs []string) bool {
 	}
 
 	for pkg in pkgs {
-		println('Installing package: $pkg')
+		if os.is_dir(pkg) {
+			println('Installing package from local path: $pkg')
+		} else {
+			println('Installing package from remote source: $pkg')
+		}
 	}
 
 	return true

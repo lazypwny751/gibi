@@ -14,4 +14,5 @@ pub:
 	list         bool @[short: 'l'; long: 'list'; help: 'List installed packages']
 	info         bool @[short: 'I'; long: 'info'; help: 'Show information about packages']
 	moo 	     bool @[long: 'moo'; help: 'Show a cow saying moo']
+	prefix 	     string @[short: 'p'; long: 'prefix'; help: 'Specify installation prefix']
 }
