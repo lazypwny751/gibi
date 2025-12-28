@@ -13,6 +13,5 @@ pub:
 	update       bool @[short: 'U'; long: 'update'; help: 'Update packages']
 	list         bool @[short: 'l'; long: 'list'; help: 'List installed packages']
 	info         bool @[short: 'I'; long: 'info'; help: 'Show information about packages']
-
-	packages     []string @[positional; help: 'Package(s) to operate on']
+	moo 	     bool @[long: 'moo'; help: 'Show a cow saying moo']
 }

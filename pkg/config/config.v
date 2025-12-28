@@ -9,19 +9,15 @@ pub enum OpMode {
 	nil
 }
 
-pub struct OperationConfig {
-pub:
-	mode     OpMode
-	packages []string
-	force    bool
-}
-
-pub struct PkgConfig {
+pub struct BasePkgConfig {
 pub:
 	name	string
 	major	u8
 	minor	u8
 	patch	u8
+	prefix  string
+	path    string
+	remote  string
 }
 
 pub fn set_opmode(install bool, uninstall bool, update bool, list bool, info bool) OpMode {
