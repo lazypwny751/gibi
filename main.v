@@ -2,11 +2,10 @@ module main
 
 import flag
 import log
-import os{join_path, home_dir, real_path, abs_path}
-
+import os { abs_path, home_dir, join_path, real_path }
 import pkg.argparse
-import pkg.config{set_opmode, OpMode}
-import pkg.install{install_packages}
+import pkg.config { set_opmode }
+import pkg.install { install_packages }
 
 const version = '2.0.0'
 
@@ -21,29 +20,29 @@ fn main() {
 	// Handle help and version flags
 	if cfg.show_help {
 		doc := flag.to_doc[argparse.Config](
-			version: version,
-			name: 'gibi',
-			fields: {
-				'show_version': 'Show version information',
-				'show_help': 'Show help information',
-				'install': 'Install packages, \"<pkg1> <pkg2> ...\"',
-				'uninstall': 'Uninstall packages,  \"<pkg1> <pkg2> ...\"',
-				'update': 'Update packages, \"<pkg1> <pkg2> ...\"',
-				'list': 'List installed packages',
-				'info': 'Show information about packages, \"<pkg1> <pkg2> ...\"',
+			version: version
+			name:    'gibi'
+			fields:  {
+				'show_version': 'Show version information'
+				'show_help':    'Show help information'
+				'install':      'Install packages, "<pkg1> <pkg2> ..."'
+				'uninstall':    'Uninstall packages,  "<pkg1> <pkg2> ..."'
+				'update':       'Update packages, "<pkg1> <pkg2> ..."'
+				'list':         'List installed packages'
+				'info':         'Show information about packages, "<pkg1> <pkg2> ..."'
 			}
 		)!
 		println(doc)
 		exit(0)
 	} else if cfg.show_version {
-		println(version)		
+		println(version)
 	} else if cfg.moo {
-		println('         (__)\n         (oo)\n   /------\\/ \n  / |    ||  \n *  /\\---/\\  \n    ~~   ~~  \nMoo!')	
+		println('         (__)\n         (oo)\n   /------\\/ \n  / |    ||  \n *  /\\---/\\  \n    ~~   ~~  \nMoo!')
 		exit(0)
 	}
 
 	// Determine operation mode
-	opmode := config.set_opmode(cfg.install, cfg.uninstall, cfg.update, cfg.list, cfg.info)
+	opmode := set_opmode(cfg.install, cfg.uninstall, cfg.update, cfg.list, cfg.info)
 
 	match opmode {
 		.install {

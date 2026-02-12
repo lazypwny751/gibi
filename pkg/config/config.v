@@ -11,9 +11,9 @@ pub enum OpMode {
 
 pub struct Version {
 pub:
-	major	u8
-	minor	u8
-	patch	u8
+	major u8
+	minor u8
+	patch u8
 }
 
 pub fn set_opmode(install bool, uninstall bool, update bool, list bool, info bool) OpMode {

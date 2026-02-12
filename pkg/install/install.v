@@ -2,7 +2,7 @@ module install
 
 import os
 
-import pkg.package
+// import pkg.package
 
 pub fn install_packages(pkgs []string) bool {
 	if pkgs.len == 0 {
@@ -12,9 +12,9 @@ pub fn install_packages(pkgs []string) bool {
 
 	for pkg in pkgs {
 		if os.is_dir(pkg) {
-			println('Installing package from local path: $pkg')
+			println('Installing package from local path: ${pkg}')
 		} else {
-			println('Installing package from remote source: $pkg')
+			println('Installing package from remote source: ${pkg}')
 		}
 	}
 
